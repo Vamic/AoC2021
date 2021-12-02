@@ -1,7 +1,7 @@
 use itertools::Itertools;
 
 fn input() -> std::vec::Vec<i32> {
-    let bytes = include_bytes!("./inputs/day1.txt");
+    let bytes = include_bytes!("input.txt");
     let str_input = String::from_utf8_lossy(bytes);
     str_input.lines().map(str::parse).map(Result::unwrap).collect()
 }
