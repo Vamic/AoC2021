@@ -3,6 +3,7 @@ mod day2;
 mod day3;
 mod day4;
 mod day5;
+mod day6;
 
 fn main() {
     day1::star1();
@@ -15,4 +16,6 @@ fn main() {
     day4::star2();
     day5::star1();
     day5::star2();
+    day6::star1();
+    day6::star2();
 }
