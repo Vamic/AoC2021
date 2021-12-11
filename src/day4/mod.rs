@@ -1,7 +1,7 @@
 fn input() -> (Vec<usize>, Vec<Vec<Vec<(usize, bool)>>>) {
     let bytes = include_bytes!("input.txt");
     let str_input = String::from_utf8_lossy(bytes);
-    let split = str_input.split_once("\n\n").unwrap();
+    let split = str_input.split_once("\r\n\r\n").unwrap();
     (
         split
             .0
