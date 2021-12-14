@@ -1,5 +1,10 @@
 use itertools::Itertools;
 
+pub fn both() {
+    star1();
+    star2();
+}
+
 fn input() -> Vec<usize> {
     let bytes = include_bytes!("input.txt");
     let str_input = String::from_utf8_lossy(bytes);

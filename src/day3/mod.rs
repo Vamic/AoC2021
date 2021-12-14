@@ -1,6 +1,11 @@
 use itertools::Itertools;
 use std::cmp;
 
+pub fn both() {
+    star1();
+    star2();
+}
+
 fn input() -> std::vec::Vec<Vec<char>> {
     let bytes = include_bytes!("input.txt");
     let str_input = String::from_utf8_lossy(bytes);
