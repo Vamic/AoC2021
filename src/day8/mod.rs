@@ -47,62 +47,37 @@ pub fn star1() {
 pub fn star2() {
     println!("Day 8 - Star 2");
     let input = input();
-    let mut result = 0;
-    for (inp, out) in input {
-        let mut map: [usize; 10] = [0; 10];
-        map[1] = inp.iter().position(|x| x.len() == 2).unwrap();
-        map[4] = inp.iter().position(|x| x.len() == 4).unwrap();
-        for i in 0..inp.len() {
-            if map.contains(&i) {
-                continue;
-            }
-            match inp[i].len() {
-                3 => map[7] = i,
+    let result = input.iter().fold(0, |acc, (inp, out)| {
+        let one = inp.iter().filter(|x| x.len() == 2).next().unwrap();
+        let four = inp.iter().filter(|x| x.len() == 4).next().unwrap();
+        acc + out
+            .iter()
+            .fold(String::new(), |acc, x| match x.len() {
+                2 => acc + "1",
+                3 => acc + "7",
+                4 => acc + "4",
                 5 => {
-                    let contains_one = inp[map[1]].chars().all(|c| inp[i].chars().contains(&c));
-                    if contains_one {
-                        map[3] = i;
-                        continue;
+                    if one.chars().all(|c| x.chars().contains(&c)) {
+                        acc + "3"
+                    } else if four.chars().filter(|c| x.chars().contains(&c)).count() == 3 {
+                        acc + "5"
+                    } else {
+                        acc + "2"
                     }
-                    let shares_four = inp[map[4]]
-                        .chars()
-                        .filter(|c| inp[i].chars().contains(&c))
-                        .count();
-                    if shares_four == 3 {
-                        map[5] = i;
-                        continue;
-                    }
-                    map[2] = i;
                 }
                 6 => {
-                    let contains_one = inp[map[1]].chars().all(|c| inp[i].chars().contains(&c));
-                    if !contains_one {
-                        map[6] = i;
-                        continue;
+                    if !one.chars().all(|c| x.chars().contains(&c)) {
+                        acc + "6"
+                    } else if four.chars().all(|c| x.chars().contains(&c)) {
+                        acc + "9"
+                    } else {
+                        acc + "0"
                     }
-                    let contains_four = inp[map[4]].chars().all(|c| inp[i].chars().contains(&c));
-                    if contains_four {
-                        map[9] = i;
-                        continue;
-                    }
-                    map[0] = i;
                 }
-                _ => map[8] = i,
-            }
-        }
-
-        result += out
-            .into_iter()
-            .map(|x| {
-                map.iter()
-                    .position(|y| {
-                        inp[*y].len() == x.len() && inp[*y].chars().all(|c| x.chars().contains(&c))
-                    })
-                    .unwrap()
+                _ => acc + "8",
             })
-            .join("")
             .parse::<usize>()
-            .unwrap();
-    }
+            .unwrap()
+    });
     println!("Result: {}", result);
 }
