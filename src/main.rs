@@ -8,6 +8,7 @@ mod day7;
 mod day8;
 mod day9;
 mod day10;
+mod day11;
 
 fn main() {
     day1::both();
@@ -20,4 +21,5 @@ fn main() {
     day8::both();
     //day9::both();
     day10::both();
+    day11::both();
 }
