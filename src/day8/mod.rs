@@ -1,5 +1,4 @@
 use itertools::Itertools;
-use std::collections::HashMap;
 
 pub fn both() {
     star1();
